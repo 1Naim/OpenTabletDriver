@@ -64,11 +64,11 @@ namespace OpenTabletDriver.Desktop.Reflection
         public IEnumerable<Type> GetMatchingTypes(Type baseType)
         {
             return from type in _pluginManager.PluginTypes
-                where type.IsAssignableTo(baseType)
-                where !type.IsAbstract
-                where IsPlatformSupported(type)
-                where !IsPluginIgnored(type)
-                select type;
+                   where type.IsAssignableTo(baseType)
+                   where !type.IsAbstract
+                   where IsPlatformSupported(type)
+                   where !IsPluginIgnored(type)
+                   select type;
         }
 
         public string? GetFriendlyName(string path)

@@ -22,7 +22,7 @@ namespace OpenTabletDriver.Native.Linux.Evdev
         {
             var err = libevdev_uinput_create_from_device(this.device, LIBEVDEV_UINPUT_OPEN_MANAGED, out this.uidev);
             CanWrite = err == 0;
-            return (ERRNO) (-err);
+            return (ERRNO)(-err);
         }
 
         public void Dispose()
@@ -36,15 +36,15 @@ namespace OpenTabletDriver.Native.Linux.Evdev
             }
         }
 
-        public void EnableProperty(InputProperty prop) => libevdev_enable_property(this.device, (uint) prop);
+        public void EnableProperty(InputProperty prop) => libevdev_enable_property(this.device, (uint)prop);
 
-        public void EnableType(EventType type) => libevdev_enable_event_type(this.device, (uint) type);
+        public void EnableType(EventType type) => libevdev_enable_event_type(this.device, (uint)type);
 
         public void EnableCode(EventType type, EventCode code) =>
-            libevdev_enable_event_code(this.device, (uint) type, (uint) code, IntPtr.Zero);
+            libevdev_enable_event_code(this.device, (uint)type, (uint)code, IntPtr.Zero);
 
         public void EnableCodes(EventType type, params EventCode[] codes) =>
-            EnableCodes(type, (IEnumerable<EventCode>) codes);
+            EnableCodes(type, (IEnumerable<EventCode>)codes);
 
         public void EnableCodes(EventType type, IEnumerable<EventCode> codes)
         {
@@ -53,10 +53,10 @@ namespace OpenTabletDriver.Native.Linux.Evdev
         }
 
         public void EnableCustomCode(EventType type, EventCode code, IntPtr ptr) =>
-            libevdev_enable_event_code(this.device, (uint) type, (uint) code, ptr);
+            libevdev_enable_event_code(this.device, (uint)type, (uint)code, ptr);
 
         public void EnableTypeCodes(EventType type, params EventCode[] codes) =>
-            EnableTypeCodes(type, (IEnumerable<EventCode>) codes);
+            EnableTypeCodes(type, (IEnumerable<EventCode>)codes);
 
         public void EnableTypeCodes(EventType type, IEnumerable<EventCode> codes)
         {
@@ -66,7 +66,7 @@ namespace OpenTabletDriver.Native.Linux.Evdev
 
         public int Write(EventType type, EventCode code, int value)
         {
-            return CanWrite ? libevdev_uinput_write_event(this.uidev, (uint) type, (uint) code, value) : int.MinValue;
+            return CanWrite ? libevdev_uinput_write_event(this.uidev, (uint)type, (uint)code, value) : int.MinValue;
         }
 
         public bool Sync()

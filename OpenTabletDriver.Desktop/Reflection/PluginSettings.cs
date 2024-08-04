@@ -79,8 +79,8 @@ namespace OpenTabletDriver.Desktop.Reflection
         private static ObservableCollection<PluginSetting> GetSettingsForType(Type targetType, object? source = null)
         {
             var settings = from property in targetType.GetProperties()
-                where property.GetCustomAttribute<SettingAttribute>() != null
-                select new PluginSetting(property, source == null ? null : property.GetValue(source));
+                           where property.GetCustomAttribute<SettingAttribute>() != null
+                           select new PluginSetting(property, source == null ? null : property.GetValue(source));
 
             return new ObservableCollection<PluginSetting>(settings);
         }
@@ -97,9 +97,9 @@ namespace OpenTabletDriver.Desktop.Reflection
             }
 
             var settings = from property in type.GetProperties()
-                let name = property.Name
-                let value = property.GetValue(obj)
-                select new PluginSetting(name, value);
+                           let name = property.Name
+                           let value = property.GetValue(obj)
+                           select new PluginSetting(name, value);
 
             return new ObservableCollection<PluginSetting>(settings);
         }

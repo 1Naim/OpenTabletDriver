@@ -49,17 +49,17 @@ namespace OpenTabletDriver.Desktop.Reflection
         public IEnumerable<Type> ExportedTypes => Assemblies.SelectMany(r => r.ExportedTypes);
 
         public IEnumerable<Type> LibraryTypes => from asm in Assemblies
-            where asm.IsLoadable()
-            from type in asm.GetExportedTypes()
-            where type.IsAbstract || type.IsInterface
-            select type;
+                                                 where asm.IsLoadable()
+                                                 from type in asm.GetExportedTypes()
+                                                 where type.IsAbstract || type.IsInterface
+                                                 select type;
 
         public IEnumerable<Type> PluginTypes => from asm in Assemblies
-            from type in asm.DefinedTypes
-            where type.IsPublic && !(type.IsInterface || type.IsAbstract)
-            where IsPluginType(type)
-            where type.IsPlatformSupported()
-            select type;
+                                                from type in asm.DefinedTypes
+                                                where type.IsPublic && !(type.IsInterface || type.IsAbstract)
+                                                where IsPluginType(type)
+                                                where type.IsPlatformSupported()
+                                                select type;
 
         private bool IsPluginType(Type type)
         {

@@ -40,9 +40,9 @@ namespace OpenTabletDriver.Desktop
         public static object CreateInstance(this IServiceProvider serviceProvider, Type type, params object[] additionalDependencies)
         {
             var constructorQuery = from ctor in type.GetConstructors()
-                let parameters = ctor.GetParameters()
-                orderby parameters.Length
-                select ctor;
+                                   let parameters = ctor.GetParameters()
+                                   orderby parameters.Length
+                                   select ctor;
 
             var constructor = constructorQuery.First();
 
@@ -55,7 +55,7 @@ namespace OpenTabletDriver.Desktop
 
         public static T CreateInstance<T>(this IServiceProvider serviceProvider, params object[] additionalDependencies)
         {
-            return (T) serviceProvider.CreateInstance(typeof(T), additionalDependencies);
+            return (T)serviceProvider.CreateInstance(typeof(T), additionalDependencies);
         }
 
         public static T GetOrCreateInstance<T>(this IServiceProvider serviceProvider, params object[] additionalDependencies)

@@ -84,8 +84,8 @@ namespace OpenTabletDriver.Desktop.Reflection
             object[] additionalDeps)
         {
             var settingProperties = from property in type.GetProperties()
-                where property.GetCustomAttribute<SettingAttribute>() != null
-                select property;
+                                    where property.GetCustomAttribute<SettingAttribute>() != null
+                                    select property;
 
             foreach (var property in settingProperties)
             {
@@ -135,8 +135,8 @@ namespace OpenTabletDriver.Desktop.Reflection
         private static object? InvokeWithProvider(this MethodInfo method, IServiceProvider provider, object[] additionalServices)
         {
             var args = from parameter in method.GetParameters()
-                let type = parameter.ParameterType
-                select provider.GetService(type) ?? additionalServices.First(s => s.GetType().IsAssignableTo(type));
+                       let type = parameter.ParameterType
+                       select provider.GetService(type) ?? additionalServices.First(s => s.GetType().IsAssignableTo(type));
 
             return method.Invoke(null, args.ToArray());
         }
